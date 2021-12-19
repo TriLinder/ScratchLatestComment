@@ -28,8 +28,9 @@ def encodeString(string) :
     return encoded
 
 def getLatestComment(id) :
-    user = html.unescape(session.get_project(id).get_comments()[0].author)
-    comment = html.unescape(session.get_project(id).get_comments()[0].content)
+    comment = session.get_project(id).get_comments()[0]
+    user = html.unescape(comment.author)
+    comment = html.unescape(comment.content)
 
     return [comment, user]
 
