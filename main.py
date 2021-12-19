@@ -42,7 +42,12 @@ def main() :
     lastComment = []
     while True :
         try :
-            latestComment = getLatestComment(commentSourceProject)
+            try :
+                latestComment = getLatestComment(commentSourceProject)
+            except IndexError :
+                print("No comments!")
+                connection.set_cloud_variable("comment", int(encodeString("Either my code broke, or there aren't any comments.")))
+                connection.set_cloud_variable("username", int(encodeString("Nobody")))
 
             if not lastComment == latestComment :
                 print("New comment by %s!" % (latestComment[1]))
